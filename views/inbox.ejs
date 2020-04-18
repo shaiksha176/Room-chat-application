@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <input type="text" name="" id="message" placeholder="start typing">
+        <button type="submit">send</button>
+    </form>
+    <p id="userName">Hello <%= name %> </p>
+    <p id="room">You are in room <%= group %> </p>
+    <button id="exit"><a href="/exitroom">Exit</a></button>
+    <ul>
+
+    </ul>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        let form = document.querySelector('form')
+        let message = document.querySelector('#message')
+        let userName = document.querySelector('#userName').textContent
+        let shortName = userName.substr(6, userName.length)
+        let room = document.querySelector('#room').textContent
+        let exitroom = document.querySelector('#exit')
+        let shortRoom = room.substr(16, room.length)
+        shortRoom = shortRoom.trim()
+        console.log(shortRoom)
+        form.addEventListener('submit', event => {
+            event.preventDefault()
+            let userMessage = { name: shortName, message: message.value, room: shortRoom }
+            socket.emit('userMessage', userMessage)
+            form.reset()
+            message.focus()
+        })
+        exitroom.addEventListener('click', () => {
+            socket.emit('exit', shortRoom)
+        })
+
+        socket.on('welcome', data => {
+            console.log(data)
+        })
+        socket.on('userMessage', data => {
+            console.log(data)
+            document.querySelector('ul').innerHTML += `<li><b>${data.name}</b> : ${data.message}</li>`
+
+        })
+
+    </script>
+</body>
+
+</html>

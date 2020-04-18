@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #form-container {
+            min-height: 80vh;
+            min-width: 10vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        input,
+        select,
+        button {
+            padding: 8px 0px 8px 2px;
+
+            border-radius: 5px;
+        }
+
+        input {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+        #submit {
+            margin-top: 25px;
+            letter-spacing: 3px;
+            word-spacing: 5px;
+
+        }
+
+        #submit button {
+            text-align: center;
+            padding: 8px 84px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="form-container">
+        <form action="/send" method="get">
+            <input type="text" name="name" id="typeName" placeholder="Enter your name">
+            <select name="group" id="">
+                <option value="js" selected>JS</option>
+                <option value="php">PHP</option>
+                <option value="node">Node</option>
+                <option value="python">Python</option>
+            </select>
+            <div id="submit">
+                <button type="submit">JOIN ROOM</button>
+
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
